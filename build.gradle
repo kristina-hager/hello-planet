@@ -17,7 +17,7 @@ jar {
 
 //use maven to fetch external dependencies
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 
