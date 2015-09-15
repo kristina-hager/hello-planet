@@ -1,5 +1,10 @@
+plugins {
+    id "com.jfrog.bintray" version "1.3.1"
+}
+
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
 
 version = '1.0'
 sourceCompatibility = 1.7
@@ -50,6 +55,30 @@ artifacts {
     archives javadocJar
 }
 
+//adding bintray / jcenter configuration
+//note: I prefer to set credentials in my shell env rather than hard-coding them here
+//use: gradle bintrayUpload
+//to upload the archives
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    //with java plugin, you can define what is uploaded by below:
+    //e.g. all the jars
+    configurations = ['archives']
+    //package info. repo, name, licenses, vcsUrl are required
+    pkg {
+        repo = 'kh-examples'
+        name = 'hello-planet'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/kristina-hager/hello-planet.git'
+        //in version, only name is required
+        version {
+            name = version
+            desc = 'Hello Planet - a hello world java example'
+        }
+    }
+}
+
 uploadArchives {
     repositories {
         flatDir {
@@ -57,4 +86,3 @@ uploadArchives {
         }
     }
 }
-
