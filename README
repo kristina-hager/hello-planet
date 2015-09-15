@@ -2,10 +2,10 @@
 Using gradle:
 First, install gradle, at least version 2.6
 
-Example gradle commands you can use
+Example gradle commands you can use:
 gradle build
 gradle check
-gradle uploadArchives //e.g. to "publish" the jar
+gradle uploadArchives //e.g. to "publish" the jars
 
 
 Credits:
