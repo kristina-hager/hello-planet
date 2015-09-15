@@ -1,0 +1,16 @@
+
+Using gradle:
+First, install gradle, at least version 2.6
+
+Example gradle commands you can use
+gradle build
+gradle check
+gradle uploadArchives //e.g. to "publish" the jar
+
+
+Credits:
+
+Following examples:
+http://www.mkyong.com/gradle/gradle-create-a-jar-file-with-dependencies/
+https://docs.gradle.org/current/userguide/tutorial_java_projects.html
+

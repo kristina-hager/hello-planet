@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+version = '1.0'
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+//create jar 
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Hello Planet Jar File Example',
+            'Implementation-Version': version,
+            'Main-Class': 'com.example.HelloPlanet'
+    }
+}
+
+//use maven to fetch external dependencies
+repositories {
+    mavenCentral()
+}
+
+
+//add dependencies
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs '../repos'
+        }
+    }
+}
+
