@@ -4,6 +4,7 @@ plugins {
 
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 version = '1.0'
@@ -55,16 +56,27 @@ artifacts {
     archives javadocJar
 }
 
+//adding maven information
+publishing {
+	publications {
+		MyPublication(MavenPublication) {
+			from components.java
+            groupId 'example.com'
+            artifactId 'HelloPlanet'
+            version version
+		}
+	}
+}
+
 //adding bintray / jcenter configuration
 //note: I prefer to set credentials in my shell env rather than hard-coding them here
-//use: gradle bintrayUpload
+//use command: gradle bintrayUpload
 //to upload the archives
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_KEY')
-    //with java plugin, you can define what is uploaded by below:
-    //e.g. all the jars
-    configurations = ['archives']
+    //links to 'publishing' section above:
+    publications = ['MyPublication']
     //package info. repo, name, licenses, vcsUrl are required
     pkg {
         repo = 'kh-examples'
@@ -79,6 +91,8 @@ bintray {
     }
 }
 
+//gradle uploadArchives
+//to publish to local filesystem (useful for testing)
 uploadArchives {
     repositories {
         flatDir {
