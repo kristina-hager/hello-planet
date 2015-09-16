@@ -25,4 +25,18 @@ public class HelloPlanet {
     public String getName() {
         return name;
     }
+
+
+    /**
+     *
+     * main - in order to test that jar runs
+     */
+    public static void main(String [] args) { 
+        HelloPlanet earth = new HelloPlanet("earth");
+        HelloPlanet mars = new HelloPlanet("mars");
+
+        System.out.println("Created two planets:" + System.lineSeparator());
+        System.out.println(earth.getName() + System.lineSeparator());
+        System.out.println(mars.getName() + System.lineSeparator());
+    }
 }
