@@ -7,7 +7,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
-version = '1.0'
+version = '1.0.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
@@ -21,7 +21,10 @@ jar {
     }
 }
 
-//use maven to fetch external dependencies
+//set basename of jar per usual jarfile naming conventions
+jar.baseName = 'hello-planet'
+
+//use jcenter to fetch external dependencies
 repositories {
     jcenter()
 }
@@ -93,6 +96,8 @@ bintray {
 
 //gradle uploadArchives
 //to publish to local filesystem (useful for testing)
+//e.g.
+//gradle uploadArchives
 uploadArchives {
     repositories {
         flatDir {
