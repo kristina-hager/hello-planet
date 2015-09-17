@@ -43,6 +43,7 @@ test {
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
+    //set basename of sources jar to be same as regular jar
     baseName = jar.baseName
 }
 
@@ -50,6 +51,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
+    //set basename of javadoc jar to be same as regular jar
     baseName = jar.baseName
 }
 
@@ -62,11 +64,16 @@ artifacts {
 //adding maven information
 publishing {
 	publications {
+        //name 'MyPublication' corresponds to 'publications' setting in bintray section
 		MyPublication(MavenPublication) {
 			from components.java
             groupId 'example.com'
             artifactId jar.baseName
             version version
+
+            //add sources and javadoc jars to upload
+            artifact(sourcesJar)
+            artifact(javadocJar)
 		}
 	}
 }
