@@ -43,14 +43,14 @@ test {
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
     from sourceSets.main.allSource
-
+    baseName = jar.baseName
 }
 
 //create javadoc jar
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
-
+    baseName = jar.baseName
 }
 
 //add to artifacts
@@ -65,7 +65,7 @@ publishing {
 		MyPublication(MavenPublication) {
 			from components.java
             groupId 'example.com'
-            artifactId 'HelloPlanet'
+            artifactId jar.baseName
             version version
 		}
 	}
@@ -73,7 +73,8 @@ publishing {
 
 //adding bintray / jcenter configuration
 //note: I prefer to set credentials in my shell env rather than hard-coding them here
-//use command: gradle bintrayUpload
+//use command: 
+//gradle bintrayUpload
 //to upload the archives
 bintray {
     user = System.getenv('BINTRAY_USER')
@@ -83,7 +84,7 @@ bintray {
     //package info. repo, name, licenses, vcsUrl are required
     pkg {
         repo = 'kh-examples'
-        name = 'hello-planet'
+        name = jar.baseName
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/kristina-hager/hello-planet.git'
         //in version, only name is required
@@ -94,7 +95,6 @@ bintray {
     }
 }
 
-//gradle uploadArchives
 //to publish to local filesystem (useful for testing)
 //e.g.
 //gradle uploadArchives
