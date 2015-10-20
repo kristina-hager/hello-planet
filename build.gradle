@@ -11,6 +11,9 @@ version = '1.1.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+//set basename of jar per usual jarfile naming conventions
+jar.baseName = 'hello-planet'
+
 
 //create jar 
 jar {
@@ -20,9 +23,6 @@ jar {
             'Main-Class': 'com.example.HelloPlanet'
     }
 }
-
-//set basename of jar per usual jarfile naming conventions
-jar.baseName = 'hello-planet'
 
 //use jcenter to fetch external dependencies
 repositories {
