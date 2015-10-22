@@ -5,9 +5,11 @@ plugins {
 
 //declare this as a Java project
 apply plugin: 'java'
+// new plugin for online promote
+apply plugin: 'maven-publish'
 
 //customize properties
-version = '1.1.1'
+version = '1.1.0'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 jar.baseName = 'hello-planet'
@@ -65,10 +67,6 @@ uploadArchives {
 
 //require :build tasks such as :test,:assemble before upload archives
 tasks.uploadArchives.dependsOn(build)
-
-
-// new plugin for online promote
-apply plugin: 'maven-publish'
 
 publishing {
 	publications {
